@@ -5,10 +5,10 @@ const Accordion = ({ title, content }) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    if (title == "What is Support Wizard?") {
+    if (title === "What is Support Wizard?") {
       setIsActive(true);
     }
-  }, []);
+  }, [title]);
 
   return (
     <div className="accordion-item">
