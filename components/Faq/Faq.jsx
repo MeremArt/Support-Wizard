@@ -13,8 +13,8 @@ const Faq = () => {
           Have questions?
         </h1>
         <div className="accordion">
-          {accordionData.map(({ title, content }) => (
-            <Accordion title={title} content={content} />
+          {accordionData.map(({ title, content }, key) => (
+            <Accordion key={key} title={title} content={content} />
           ))}
         </div>
       </div>
