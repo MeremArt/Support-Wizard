@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="dark:bg-zinc-800">
+      <main className="dark:bg-zinc-800 fix-it">
         <section>
           {/* hero container  */}
           <div className="container flex flex-col-reverse mx-auto p-6 lg:flex-row">

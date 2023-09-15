@@ -125,6 +125,9 @@
   font-weight: 400;
   background-color: #7371d1;
 }
+body {
+  overflow-x: hidden;
+}
 
 @media screen and (max-width: 700px) {
   body {
