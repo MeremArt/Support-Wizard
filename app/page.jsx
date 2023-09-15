@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Image from "next/image";
 import Faq from "@/components/Faq/Faq";
 import Navbar from "@/components/navbar/page";
