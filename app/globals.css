@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+/* Define the scrollbar width and track color */
+::-webkit-scrollbar {
+  width: 6px; /* You can adjust the width as needed */
+}
+
+/* Define the scrollbar track color (the background) */
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Adjust the track color as needed */
+}
+
+/* Define the scrollbar thumb color (the handle) */
+::-webkit-scrollbar-thumb {
+  background-color: #8a88fb; /* Change to the desired color (#8A88FB) */
+  border-radius: 3px; /* Rounded corners for the thumb */
+}
+
+/* Define the scrollbar thumb color when hovered */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #655de6; /* Change to the desired hover color (optional) */
+}
+
+/* HAMBURGER MENU */
+
+.hamburger {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s;
+  position: relative;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 3px;
+  top: 0;
+  left: 0;
+  background: #9c9aa6;
+  transform: rotate(0);
+  transition: all 0.5s;
+}
+
+.hamburger-middle {
+  transform: translateY(7px);
+}
+
+.hamburger-bottom {
+  transform: translateY(14px);
+}
+
+.open {
+  transform: rotate(90deg);
+  transform: translateY(0px);
+}
+
+.open .hamburger-top {
+  transform: rotate(45deg) translateY(6px) translateX(6px);
+}
+
+.open .hamburger-middle {
+  display: none;
+}
+
+.open .hamburger-bottom {
+  transform: rotate(-45deg) translateY(6px) translateX(-6px);
+}
+
+.cta {
+  color: #fff;
+  text-align: center;
+
+  font-style: normal;
+  font-weight: 700;
+  /* 69.6px */
+}
+.Faq-cdl h1 {
+  font-family: "Inter", sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 43px; /* 125% */
+  letter-spacing: -1.44px;
+}
+
+.accordion {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.accordion-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+  border-top: 1px solid var(--black-006, #ececec);
+  border-bottom: 1px solid var(--black-006, #ececec);
+}
+
+.accordion-title:hover {
+  background-color: #8a88fb;
+  color: white;
+}
+
+.accordion-title,
+.accordion-content {
+  padding: 1rem;
+  font-size: 14px;
+  font-weight: 500;
+}
+.accordion-content {
+  padding: 1rem;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #7371d1;
+}
+
+@media screen and (max-width: 700px) {
+  body {
+    font-size: 18px;
+  }
+}
