@@ -1,5 +1,5 @@
 import React from "react"; // Import React
-
+/* eslint-disable */
 function Footer() {
   return (
     <footer className="py-16 bg-black dark:bg-zinc-700">

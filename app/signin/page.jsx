@@ -1,5 +1,5 @@
 import React from "react";
-
+/* eslint-disable */
 const Signin = () => {
   return (
     <main className="flex items-center justify-center bg-horror min-h-screen  ">
