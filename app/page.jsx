@@ -14,11 +14,12 @@ export default function Home() {
             <div className="flex flex-col space-y-12 mb-44 lg:mt-16 lg:w-1/2 xl:mb-52">
               <h1 className="text-5xl font-bold text-center lg:text-4xl lg:max-w-4xl lg:text-left dark:text-white">
                 Unlock Customer Delight with
-                <br /> <span className="text-wizard">Support Wizard's</span>
+                <br />{" "}
+                <span className="text-wizard">Support Wizard&apos;s</span>
                 <br /> Enchanting Messaging!
               </h1>
               <p className="text-xl text-center text-gray-400 lg:max-w-4xl lg:text-left tracking-wider  ">
-                With Support Wizard, you can seamlessly track your visitors'
+                With Support Wizard, you can seamlessly track your visitors
                 real-time page views, their Knowledge Base searches, and website
                 visits. Gain insight into their entire journey, identify team
                 members who interacted with customers recently, and effortlessly
@@ -36,11 +37,13 @@ export default function Home() {
             </div>
             {/* image */}
             <div className="mb-24 max-auto md:w-180 lg:mb-0 lg:w-1/2">
-              <img
+              <Image
                 className="hover:scale-105 duration-300"
                 src="/images/cuate.png"
                 alt="feature"
                 loading="lazy"
+                width={600}
+                height={600}
               />
             </div>
           </div>
@@ -63,11 +66,13 @@ export default function Home() {
             {/* content container  */}
             {/* image */}
             <div className="mb-24 max-auto md:w-180 lg:mb-0 lg:w-1/2">
-              <img
+              <Image
                 className="hover:scale-105 duration-300 "
                 src="/images/pana.png"
                 alt="feature"
                 loading="lazy"
+                width={600}
+                height={600}
               />
             </div>
             <div className="flex flex-col space-y-12 mb-44 lg:mt-16 lg:w-1/2 xl:mb-50">
@@ -109,10 +114,12 @@ export default function Home() {
             </div>
             {/* image */}
             <div className="mb-24 max-auto md:w-180 lg:mb-0 lg:w-1/2">
-              <img
+              <Image
                 className="hover:scale-105 duration-300"
                 src="/images/rafiki.png"
                 alt="feature"
+                width={600}
+                height={600}
               />
             </div>
           </div>
@@ -127,10 +134,13 @@ export default function Home() {
             {/* content container  */}
             {/* image */}
             <div className="mb-24 max-auto md:w-180 lg:mb-0 lg:w-1/2">
-              <img
+              <Image
                 className="hover:scale-105 duration-300 "
                 src="/images/computer.png"
                 alt="feature"
+                loading="lazy"
+                width={600}
+                height={600}
               />
             </div>
             <div className="flex flex-col space-y-12 mb-44 lg:mt-16 lg:w-1/2 xl:mb-50">
