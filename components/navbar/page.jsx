@@ -93,13 +93,13 @@ function Navbar() {
             </a>
 
             <a
-              href=""
+              href="/signin"
               className="w-full pt-6 border-t border-gray-400 text-center"
             >
               Login
             </a>
             <a
-              href=""
+              href="/signup"
               className="w-full py-3 text-center rounded-full bg-wizard"
             >
               {" "}
