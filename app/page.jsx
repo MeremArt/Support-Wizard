@@ -172,10 +172,10 @@ export default function Home() {
             </h2>
             <div className=" flex flex-col  md:flex-row items-center justify-center mt-2 lg:mt-28 mx-auto lg:mx-0 space-x-2">
               <input
-                className="py-3 px-8 mb-4 md:mb-0 w-64 md:w-72 text-black text-left placeholder:text-sm  border-wizard border-2 rounded-full  placeholder:sm:text-left dark:bg-none  focus:outline-none "
+                className="py-3 px-8 mb-4 md:mb-0 w-84 md:w-72 text-black text-left placeholder:text-sm  border-wizard border-2 rounded-full  placeholder:sm:text-left dark:bg-none  focus:outline-none "
                 placeholder="Enter your email..."
               />
-              <button className=" py-3 px-8 w-52 md:w-52 text-white bg-wizard rounded-full text-transform: capitalize hover:opacity-70 duration-200">
+              <button className=" py-3 px-8 w-64 md:w-52 text-white bg-wizard rounded-full text-transform: capitalize hover:opacity-70 duration-200">
                 Sign up <span className="hidden md:inline"> free</span>
               </button>
             </div>
