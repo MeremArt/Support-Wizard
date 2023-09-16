@@ -27,9 +27,9 @@ export default function Home() {
                 members who interacted with customers recently, and effortlessly
                 maintain a comprehensive conversation history.
               </p>
-              <div className="flex mx-auto lg:mx-0 space-x-2">
+              <div className="flex-col md:flex-row mx-auto lg:mx-0 space-x-2">
                 <input
-                  className=" py-2 px-4 md:py-3 md:px-8 w-full md:w-64 text-black text-left placeholder:text-sm  border-wizard border-2 rounded-full  placeholder:sm:text-left dark:bg-zinc-800 dark:text-white focus:outline-none "
+                  className=" py-2 px-4 md:py-3 md:px-8 w-full mb-5 md:mb-0 md:w-64 text-black  text-left placeholder:text-sm  border-wizard border-2 rounded-full  placeholder:sm:text-center dark:bg-zinc-800 dark:text-white focus:outline-none "
                   placeholder="Enter your email..."
                 />
                 <button className="text-sm w-full md:w-52 md:text-lg py-3 px-4 md:px-8 text-white bg-wizard rounded-full text-transform: capitalize hover:opacity-70 duration-200">
