@@ -1,13 +1,7 @@
 import React from "react";
-import Dashboardlayout from "@/components/Dashboardlayout/page";
-const profile = () => {
-  return (
-    <>
-      <Dashboardlayout>
-        <main>Hello</main>
-      </Dashboardlayout>
-    </>
-  );
+
+const page = () => {
+  return <div>page</div>;
 };
 
-export default profile;
+export default page;
