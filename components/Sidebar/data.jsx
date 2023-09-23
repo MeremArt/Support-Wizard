@@ -4,24 +4,26 @@ import { MessageIcon } from "./icons/MessageIcon";
 import { PictureIcon } from "./icons/PictureIcon";
 import { DocumentIcon } from "./icons/DocumentIcon";
 import { StatisticsIcon } from "./icons/StatisticsIcon";
-
+import { HomeIcon } from "./icons/HomeIcon";
+import { TbReportAnalytics } from "react-icons/tb";
+import { IoIosSettings } from "react-icons/io";
 export const data = [
   {
-    section: "Documents",
-    icon: <DocumentIcon />,
+    section: "Home",
+    icon: <HomeIcon />,
     content: [
       {
-        title: "Taxes",
+        title: "Dashboard",
         link: "/",
       },
-      {
-        title: "Travel",
-        link: "/documents/travel",
-      },
-      {
-        title: "Insurance",
-        link: "/Documents",
-      },
+      //   {
+      //     title: "Travel",
+      //     link: "/documents/travel",
+      //   },
+      //   {
+      //     title: "Insurance",
+      //     link: "/Documents",
+      //   },
     ],
   },
   {
@@ -43,21 +45,21 @@ export const data = [
     ],
   },
   {
-    section: "Pictures",
-    icon: <PictureIcon />,
+    section: "Reporting",
+    icon: <TbReportAnalytics size={20} />,
     content: [
       {
-        title: "Vacations",
+        title: "New Ticket",
         link: "/pictures/vacations",
       },
       {
-        title: "Anniversary",
+        title: "Solved Ticket",
         link: "/pictures/anniversary",
       },
-      {
-        title: "University",
-        link: "/pictures/university",
-      },
+      //   {
+      //     title: "University",
+      //     link: "/pictures/university",
+      //   },
     ],
   },
   {
@@ -65,11 +67,11 @@ export const data = [
     icon: <StatisticsIcon />,
     content: [
       {
-        title: "Finances",
+        title: "Page Views",
         link: "/statistics/finances",
       },
       {
-        title: "Call Stats",
+        title: "Live Visitors",
         link: "/statistics/call-stats",
       },
       {
@@ -79,17 +81,17 @@ export const data = [
     ],
   },
   {
-    section: "Events",
-    icon: <EventIcon />,
+    section: "Settings",
+    icon: <IoIosSettings size={25} />,
     content: [
       {
-        title: "Weddings",
+        title: "User Management",
         link: "/events/weddings",
       },
-      {
-        title: "Networking",
-        link: "/events/networking",
-      },
+      //   {
+      //     title: "Networking",
+      //     link: "/events/networking",
+      //   },
     ],
   },
   {

@@ -35,7 +35,7 @@ export function SidebarItems() {
 
   return (
     <div className="flex h-full w-full">
-      <div className="h-full bg-fuchsia-950 pt-10">
+      <div className="h-full bg-dashbg pt-10">
         {data.map(({ section, icon }) => (
           <div
             key={section}
@@ -59,7 +59,7 @@ export function SidebarItems() {
       </div>
 
       {(!sidebarOpen || window.innerWidth < 1024) && (
-        <div className="h-full w-full bg-fuchsia-900 pt-5">
+        <div className="h-full w-full bg-dashfix pt-5">
           {data.map(({ section, content }) => (
             <div hidden={section !== currentSection} key={section}>
               <div>
