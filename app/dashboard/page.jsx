@@ -3,7 +3,9 @@ import { DashboardLayout } from "@/components/Layout";
 const dashboard = ({ children }) => {
   return (
     <>
-      <DashboardLayout>{children}</DashboardLayout>
+      <DashboardLayout>
+        <div className="text-xl text-black">Welcome to the dashboard</div>
+      </DashboardLayout>
     </>
   );
 };
