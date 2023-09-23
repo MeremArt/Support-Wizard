@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Snippet } from "./Snippet";
 import { FileIcon, FolderIcon, JSXIcon } from "./icons";
 
