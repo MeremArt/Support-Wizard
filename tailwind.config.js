@@ -11,6 +11,8 @@ module.exports = {
         wizard: "#8A88FB",
         black: "#1E1E1E",
         horror: "#1C1B32",
+        dashbg: "#282C34",
+        dashfix: "#20232A",
       },
       fontFamily: {
         sans: ["poppins", "sans-serif"],
