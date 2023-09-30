@@ -1,12 +1,12 @@
 import React from "react";
 import Charthead from "../Charthead/page";
-import LineChart from "../linechart/page";
+import LineChart from "../linecharts/page";
 function Line() {
   return (
     <>
-      <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-        {/* <Charthead category="chart" title="live visitors" /> */}
-        <div className="flex flex-col md:flex-row">
+      <div className="m-4 md:m-10 mt-24 p-10 shadow-md  bg-white dark:bg-secondary-dark-bg rounded-3xl">
+        <Charthead category="" title="Live visitors" />
+        <div className="flex   flex-col md:flex-row">
           <LineChart />
         </div>
       </div>
