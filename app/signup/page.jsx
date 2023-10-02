@@ -1,6 +1,22 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { signUp } from "../server/authentication/signUp";
 /* eslint-disable */
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleSignUp = async () => {
+    try {
+      // Call the signUp function from your module
+      await signUp(email, password);
+
+      // Handle successful sign-up here, e.g., redirect to a dashboard or show a success message
+      console.log("User signed up successfully!");
+    } catch (error) {
+      // Handle sign-up error here, e.g., display an error message
+      console.error("Sign-up error:", error.message);
+    }
+  };
   return (
     <main className="flex items-center justify-center bg-horror min-h-screen  ">
       {/* card container  */}
@@ -27,14 +43,27 @@ const Signup = () => {
             type="text"
             className="w-full mb-4  p-3 border border-gary-300 rounded-md placeholder:font-light focus:outline-none"
             placeholder="name@work-email.com"
+            required
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <label className="flex text-white py-3">Password</label>
           <input
-            type="text"
+            type="password"
             className="w-full mb-12   p-3 border border-gary-300 rounded-md placeholder:font-light focus:outline-none"
             placeholder="8 characters or more"
+            value={password}
+            required
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
-          <button className="w-full p-3 text-white bg-horror rounded-full text-transform: capitalize hover:opacity-70 duration-200">
+          <button
+            onClick={handleSignUp}
+            className="w-full p-3 text-white bg-horror rounded-full text-transform: capitalize hover:opacity-70 duration-200"
+          >
             Create Account
           </button>
         </div>
