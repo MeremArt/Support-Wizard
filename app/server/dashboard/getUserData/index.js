@@ -5,6 +5,7 @@ const jsonwebtoken = require('jsonwebtoken');
 
 export async function getUserData() {
     try{
+        
         const db = getFirestore();
 var email = localStorage.getItem("email");
 
