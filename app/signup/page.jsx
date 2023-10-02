@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { signUp } from "../server/authentication/signUp";
+// import { signUp } from "../server/authentication/signUp";
 import Image from "next/image";
 const Signup = () => {
   // Define state variables to store input values
