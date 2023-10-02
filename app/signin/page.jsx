@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 /* eslint-disable */
 const Signin = () => {
   return (
