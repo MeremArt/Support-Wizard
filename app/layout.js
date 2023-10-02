@@ -1,5 +1,5 @@
 import "./globals.css";
-import firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar/page";
 import Footer from "@/components/Footer/page";
@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 import Sidebar from "@/components/Sidebar/Sidebar";
 import {firebaseConfig} from "./server/config/firebaseConfig";
 
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 
 export const metadata = {
