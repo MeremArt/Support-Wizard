@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
@@ -19,8 +19,13 @@ const Signin = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
+    if (!formData.email || !formData.password) {
+      toast.error("Please fill all fields");
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const response = await axios.post(url, formData, {
         headers: {
@@ -30,15 +35,25 @@ const Signin = () => {
 
       if (response.status === 200) {
         // Successful login, redirect to the dashboard
+        toast.success("Successfully signed up", {
+          position: "top-right",
+          autoClose: 3000,
+          style: { background: "#7371D1", color: "white" },
+        });
+
         router.push("/dashboard");
+
+        setFormData({ email: "", password: "" });
       } else {
         console.log(response.statusText);
         console.log(response.data); // Log the response data for debugging
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
+        toast.error("Server error");
         console.log("Validation error:", error.response.data); // Log server validation errors
       } else {
+        toast.error("An error occurred. Please try again later.");
         console.error("An error occurred. Please try again later.");
       }
     } finally {
