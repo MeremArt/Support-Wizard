@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
+import Image from "next/image";
 
 const url = "https://chat-wizard.onrender.com/api/v1/users/login";
 
@@ -51,7 +53,7 @@ const Signin = () => {
         {/* card container */}
         <div className="flex flex-col m-6 space-y-10 bg-wizard md:bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
           {/* left side */}
-          <img
+          <Image
             width={440}
             height={440}
             src="/images/sign.png"
