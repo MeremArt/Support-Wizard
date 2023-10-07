@@ -1,6 +1,6 @@
 import React from "react";
 import { DashboardLayout } from "@/components/Layout";
-import LineChart from "@/components/linecharts/page";
+
 import Line from "@/components/line/page";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { AiOutlineFolderView } from "react-icons/ai";
