@@ -109,7 +109,7 @@ const Signin = () => {
                 className="w-full p-3 text-white bg-horror rounded-full text-transform: capitalize hover:opacity-70 duration-200"
                 disabled={isLoading}
               >
-                {isLoading ? "Logging in..." : " Login"}
+                {isLoading ? "Logging..." : " Login"}
               </button>
             </form>
           </div>
