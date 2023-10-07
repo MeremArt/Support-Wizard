@@ -1,6 +1,6 @@
 import React from "react";
 import Charthead from "../Charthead/page";
-import LineChart from "../linecharts/page";
+import LineChart from "../linechart/page";
 function Line() {
   return (
     <>
