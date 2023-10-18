@@ -31,12 +31,12 @@ export const data = [
     icon: <MessageIcon />,
     content: [
       {
-        title: "Unbox",
-        link: "/messages/unbox",
+        title: "Direct Messages",
+        link: "/dashboard/Chat",
       },
       {
         title: "Unread",
-        link: "/messages/unread",
+        link: "/dashboard/Chat",
       },
       {
         title: "Archived",

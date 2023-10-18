@@ -4,6 +4,7 @@ import Image from "next/image";
 import Faq from "@/components/Faq/Faq";
 import Navbar from "@/components/navbar/page";
 import Footer from "@/components/Footer/page";
+import SupportEngine from "@/components/SupportEngine/page";
 export default function Home() {
   return (
     <>
@@ -189,6 +190,7 @@ export default function Home() {
             <Faq className="mt-10" />
           </div>
         </section>
+        <SupportEngine />
       </main>
       <Footer />
     </>
