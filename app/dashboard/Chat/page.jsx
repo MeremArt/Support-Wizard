@@ -3,6 +3,13 @@ import { DashboardLayout } from "@/components/Layout";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 const Chat = () => {
+  // Check if document is available before setting showChat
+  const [showChat, setShowChat] = useState(false);
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      setShowChat(true);
+    }
+  }, []);
   let ChatEngine;
   let MessageFormSocial;
 
@@ -23,14 +30,6 @@ const Chat = () => {
   const username = "Support Wizard";
   const secret = "Support";
   const projectID = "f3e7ff82-0dee-4799-ab2b-44c43fd6f232";
-
-  // Check if document is available before setting showChat
-  const [showChat, setShowChat] = useState(false);
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      setShowChat(true);
-    }
-  }, []);
 
   return (
     <>
