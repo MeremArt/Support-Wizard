@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import { DashboardLayout } from "@/components/Layout";
 
 import Line from "@/components/line/page";
