@@ -292,6 +292,11 @@
   background-color: white !important;
   border-radius: 0px !important;
 }
+.transition-3 {
+  transition: all 0.33s ease;
+  -webkit-transition: all 0.33s ease;
+  -moz-transition: all 0.33s ease;
+}
 
 @media screen and (max-width: 700px) {
   body {

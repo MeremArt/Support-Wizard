@@ -19,6 +19,7 @@ const Avatar = (props) => {
         className="transition-3"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onClick={() => props.onClick && props.onClick()}
         style={{
           ...styles.chatWithMeButton,
           ...{ border: hovered ? `1px solid #8A88FB` : `4px solid #8A88FB` },
