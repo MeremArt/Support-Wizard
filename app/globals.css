@@ -214,7 +214,11 @@
   max-width: 115px !important;
   margin-top: 30px !important;
 }
-
+#ce-primary-button {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
 .ce-social-message-form {
   background-color: #4a5162 !important;
 }
@@ -286,6 +290,7 @@
   background-color: #4a5162 !important;
   border: 1px solid #9a97fc !important;
   color: #9a97fc !important;
+  align-items: center;
 }
 
 .ce-autocomplete-close {

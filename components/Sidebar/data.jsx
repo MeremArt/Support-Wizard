@@ -14,7 +14,7 @@ export const data = [
     content: [
       {
         title: "Dashboard",
-        link: "/",
+        link: "/dashboard",
       },
       //   {
       //     title: "Travel",

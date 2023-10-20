@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { styles } from "../Avatar/styles";
 import EmailForm from "./EmailForm";
+
 const SupportWindow = (props) => {
+  const [user, setUser] = useState(false);
+  const [chat, setChat] = useState(false);
   return (
     <div
       className="transition-3"
@@ -10,7 +13,16 @@ const SupportWindow = (props) => {
         ...{ opacity: props.visible ? `1` : `0` },
       }}
     >
-      <EmailForm />
+      <EmailForm
+        // visible={user === null || chat === null}
+        setUser={(user) => setUser(user)}
+        setChat={(chat) => setUser(chat)}
+      />
+      {/* <SupportEngine
+        visible={user !== null && chat !== null}
+        user={user}
+        chat={chat}
+      /> */}
     </div>
   );
 };
