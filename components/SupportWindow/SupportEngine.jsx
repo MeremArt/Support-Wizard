@@ -39,7 +39,7 @@ const SupportEngine = (props) => {
   }, []);
 
   return (
-    <div className="transition-3" style={chatWindowStyles(props.visible)}>
+    <div className="transition-3" style={chatWindowStyles(true)}>
       {showChat && (
         <ChatEngineWrapper>
           <ChatSocket
