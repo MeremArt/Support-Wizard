@@ -27,10 +27,9 @@ const Chat = () => {
   }
 
   // Environment variables for sensitive data
-  const username = "Support Wizard";
-  const secret = "Support";
-  const projectID = "f3e7ff82-0dee-4799-ab2b-44c43fd6f232";
-
+  const username = "Support";
+  const secret = "Secret";
+  const projectID = "6f18118b-9e6a-4c2b-a46e-596cad716793";
   return (
     <>
       <DashboardLayout>
@@ -51,12 +50,12 @@ const Chat = () => {
                 // renderIceBreaker={(chat) => {
                 //   <div />;
                 // }}
-                renderNewMessageForm={() =>
-                  MessageFormSocial && <MessageFormSocial />
-                }
-                renderPeopleSettings={(creds, chat) => {
-                  <div />;
-                }}
+                // renderNewMessageForm={() =>
+                //   MessageFormSocial && <MessageFormSocial />
+                // }
+                // renderPeopleSettings={(creds, chat) => {
+                //   <div />;
+                // }}
                 onNewMessage={() =>
                   new Audio(
                     "https://chat-engine-assets.s3.amazonaws.com/click.mp3"

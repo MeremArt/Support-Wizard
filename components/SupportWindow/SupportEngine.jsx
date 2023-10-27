@@ -1,9 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import React, { useMemo, useState, useEffect } from "react";
 
 const SupportEngine = (props) => {
   const [showChat, setShowChat] = useState(false);
+  const username = "Emotional-damage";
+  const secret = "Secret";
+  const chatID = "209340";
 
   // Use a single useEffect for handling both cases
   useEffect(() => {
@@ -17,35 +19,36 @@ const SupportEngine = (props) => {
   }, [props.visible]); // Rerun this effect when props.visible changes
 
   // Use a single dynamic import for all required components
-  const dynamicImport = (componentName) =>
-    dynamic(() =>
-      import("react-chat-engine").then((module) => module[componentName])
+  // Use the useMemo hook to load the components only once
+  const ChatEngineWrapper = useMemo(() => {
+    return dynamic(() =>
+      import("react-chat-engine").then((module) => module["ChatEngineWrapper"])
     );
+  }, []);
 
-  // Wrap all dynamic imports in a try-catch block
-  let ChatEngineWrapper;
-  let Socket;
-  let ChatFeed;
+  const ChatSocket = useMemo(() => {
+    return dynamic(() =>
+      import("react-chat-engine").then((module) => module["ChatSocket"])
+    );
+  }, []);
 
-  try {
-    ChatEngineWrapper = dynamicImport("ChatEngineWrapper");
-    Socket = dynamicImport("Socket");
-    ChatFeed = dynamicImport("ChatFeed");
-  } catch (error) {
-    console.error("Error loading dynamic imports:", error);
-    return null;
-  }
+  const ChatFeed = useMemo(() => {
+    return dynamic(() =>
+      import("react-chat-engine").then((module) => module["ChatFeed"])
+    );
+  }, []);
 
   return (
     <div className="transition-3" style={chatWindowStyles(props.visible)}>
       {showChat && (
         <ChatEngineWrapper>
-          <Socket
-            projectID={process.env.REACT_APP_CE_PROJECT_ID}
-            userName={props.user.email}
-            userSecret={props.user.email}
+          <ChatSocket
+            projectID="6f18118b-9e6a-4c2b-a46e-596cad716793"
+            senderUsername={username}
+            chatID="210851"
+            chatAccessKey="ca-57c22045-d8ac-4496-ab70-d850ddfbdb70"
           />
-          <ChatFeed activeChat={props.chat.id} />
+          <ChatFeed activeChat="210851" />
         </ChatEngineWrapper>
       )}
     </div>
