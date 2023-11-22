@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import Image from "next/image";
 
-const url = "https://chat-wizard.onrender.com/api/v1/users/login";
+const url = "https://chat-wizard.vercel.app/api/v1/login/";
 
 const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);

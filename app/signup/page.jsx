@@ -9,7 +9,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "react-toastify/dist/ReactToastify.css";
 
-const url = "https://chat-wizard.onrender.com/api/v1/users";
+const url = "https://chat-wizard.vercel.app/api/v1/users/";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -73,7 +73,6 @@ const Signup = () => {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
       <main className="flex items-center justify-center bg-horror min-h-screen">
         <div className="flex flex-col m-6 space-y-10 bg-wizard md:bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
           <Image
