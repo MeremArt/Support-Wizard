@@ -5,17 +5,23 @@ import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import Image from "next/image";
+import dashboard from "../dashboard/page";
 
-const url = "https://chat-wizard.vercel.app/api/v1/login/";
+const url = "https://chat-wizard.vercel.app/api/v1/users/login/";
 
 const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [enteredEmail, setEnteredEmail] = useState("");
   const router = useRouter();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    if (name === "email") {
+      setEnteredEmail(value); // Update the entered email
+    }
+    console.log(enteredEmail);
   };
 
   const handleLogin = async (e) => {
@@ -42,7 +48,7 @@ const Signin = () => {
           style: { background: "#7371D1", color: "white" },
         });
 
-        router.push("/dashboard");
+        router.push(`/dashboard/Chat?email=${formData.email}`);
 
         setFormData({ email: "", password: "" });
       } else {

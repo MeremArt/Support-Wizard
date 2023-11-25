@@ -51,7 +51,7 @@ const Signup = () => {
           style: { background: "#7371D1", color: "white" },
         });
 
-        router.push("/dashboard");
+        router.push(`/dashboard/Chat?email=${formData.email}`);
 
         setFormData({ email: "", password: "" });
       } else {
