@@ -12,6 +12,19 @@ const EmailContext = createContext();
 const EmailProvider = ({ children }) => {
   const [email, setEmail] = useState("");
 
+  useEffect(() => {
+    // Check if the "email" exists in the local storage
+    if (typeof window !== "undefined") {
+      const storedEmail = localStorage.getItem("email");
+
+      if (storedEmail) {
+        // Email found in local storage
+        console.log("Email found in local storage!");
+        setEmail(storedEmail);
+      }
+    }
+  }, []);
+
   return (
     <EmailContext.Provider value={{ email, setEmail }}>
       {children}
@@ -53,6 +66,11 @@ const Chat = () => {
 
       // Update the email in the context
       setEmail(newEmail);
+
+      // Also, store the email in local storage for persistence
+      if (typeof window !== "undefined") {
+        localStorage.setItem("email", newEmail);
+      }
     }
 
     // Show the chat when the component is mounted
@@ -60,20 +78,6 @@ const Chat = () => {
       setShowChat(true);
     }
   }, [setEmail]);
-  // useEffect(() => {
-  //   // Check if the "email" exists in the local storage
-  //   const storedEmail = localStorage.getItem("email");
-
-  //   if (storedEmail) {
-  //     // Execute your callback here
-  //     console.log("Email found in local storage!");
-
-  //     // Show the chat when the component is mounted
-  //     if (typeof document !== "undefined") {
-  //       setShowChat(true);
-  //     }
-  //   }
-  // }, []);
 
   // Dynamically import ChatEngine and MessageFormSocial components
   let ChatEngine;
@@ -92,10 +96,8 @@ const Chat = () => {
     return null; // Return null or an error message component
   }
 
-  // Get the email from the local storage
-  // const email = localStorage.getItem("email");
   // ChatEngine setup
-  const username = email;
+  const username = email || ""; // Ensure username is not undefined
   const secret = "secret";
   const projectID = "9fc5ff33-97af-4fac-ae05-264e99afb765";
 
