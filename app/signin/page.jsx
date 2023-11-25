@@ -4,39 +4,28 @@ import { DashboardLayout } from "@/components/Layout";
 import dynamic from "next/dynamic";
 import axios from "axios";
 import { useState, useEffect } from "react";
+
 // Define the Chat component
 const Chat = () => {
   // State variables
   const [showChat, setShowChat] = useState(false);
-  const [email, setEmail] = useState(""); // Declare email state
+  let email;
 
   useEffect(() => {
-    // Check if running on the client side
-    const isClient = typeof window !== "undefined";
-
-    if (isClient) {
-      // Get email from local storage
-      const storedEmail = localStorage.getItem("email");
-
-      // Check if the "email" exists in the URL
-      if (storedEmail) {
+    // Check if the "email" exists in localStorage
+    if (typeof window !== "undefined") {
+      email = localStorage.getItem("email");
+      if (email) {
         // Execute your callback here
-        console.log("Email query parameter exists!");
+        console.log("Email found in localStorage!");
 
-        // Remove the query parameter to prevent duplicate executions
-        const urlParams = new URLSearchParams(window.location.search);
-        urlParams.delete("email");
-        window.history.replaceState(
-          {},
-          "",
-          window.location.pathname + "?" + urlParams.toString()
-        );
+        // Remove the email from localStorage to prevent duplicate executions
+        localStorage.removeItem("email");
       }
+    }
 
-      // Set email state
-      setEmail(storedEmail);
-
-      // Show the chat when the component is mounted
+    // Show the chat when the component is mounted
+    if (typeof document !== "undefined") {
       setShowChat(true);
     }
   }, []);
