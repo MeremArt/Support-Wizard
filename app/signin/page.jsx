@@ -8,31 +8,35 @@ import { useState, useEffect } from "react";
 const Chat = () => {
   // State variables
   const [showChat, setShowChat] = useState(false);
+  const [email, setEmail] = useState(""); // Declare email state
 
   useEffect(() => {
     // Check if running on the client side
     const isClient = typeof window !== "undefined";
 
-    // Get email from local storage
-    const email = isClient ? localStorage.getItem("email") : null;
-
-    // Check if the "email" exists in the URL
-    if (email) {
-      // Execute your callback here
-      console.log("Email query parameter exists!");
-
-      // Remove the query parameter to prevent duplicate executions
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.delete("email");
-      window.history.replaceState(
-        {},
-        "",
-        window.location.pathname + "?" + urlParams.toString()
-      );
-    }
-
-    // Show the chat when the component is mounted
     if (isClient) {
+      // Get email from local storage
+      const storedEmail = localStorage.getItem("email");
+
+      // Check if the "email" exists in the URL
+      if (storedEmail) {
+        // Execute your callback here
+        console.log("Email query parameter exists!");
+
+        // Remove the query parameter to prevent duplicate executions
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.delete("email");
+        window.history.replaceState(
+          {},
+          "",
+          window.location.pathname + "?" + urlParams.toString()
+        );
+      }
+
+      // Set email state
+      setEmail(storedEmail);
+
+      // Show the chat when the component is mounted
       setShowChat(true);
     }
   }, []);
