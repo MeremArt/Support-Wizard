@@ -47,7 +47,8 @@ const Signin = () => {
           autoClose: 3000,
           style: { background: "#7371D1", color: "white" },
         });
-
+        // Set the email in local storage
+        localStorage.setItem("email", formData.email);
         router.push(`/dashboard/Chat?email=${formData.email}`);
 
         setFormData({ email: "", password: "" });
