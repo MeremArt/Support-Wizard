@@ -50,7 +50,7 @@ const Signup = () => {
           autoClose: 3000,
           style: { background: "#7371D1", color: "white" },
         });
-
+        localStorage.setItem("email", formData.email);
         router.push(`/dashboard/Chat?email=${formData.email}`);
 
         setFormData({ email: "", password: "" });

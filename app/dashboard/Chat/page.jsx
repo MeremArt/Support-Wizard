@@ -3,34 +3,77 @@
 import { DashboardLayout } from "@/components/Layout";
 import dynamic from "next/dynamic";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
+
+// Create a context to manage the email state
+const EmailContext = createContext();
+
+// Define a provider component to wrap your app with the context
+const EmailProvider = ({ children }) => {
+  const [email, setEmail] = useState("");
+
+  return (
+    <EmailContext.Provider value={{ email, setEmail }}>
+      {children}
+    </EmailContext.Provider>
+  );
+};
+
+// Define a hook to easily access the context in your components
+const useEmail = () => {
+  const context = useContext(EmailContext);
+  if (!context) {
+    throw new Error("useEmail must be used within an EmailProvider");
+  }
+  return context;
+};
+
 // Define the Chat component
 const Chat = () => {
   // State variables
   const [showChat, setShowChat] = useState(false);
-  const urlParams = new URLSearchParams(window.location.search);
-  const email = urlParams.get("email");
+  // const { email, setEmail } = useEmail();
 
+  // useEffect(() => {
+  //   // Check if the "email" exists in the URL
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   const newEmail = urlParams.get("email");
+
+  //   if (newEmail) {
+  //     // Execute your callback here
+  //     console.log("Email query parameter exists!");
+
+  //     // Remove the query parameter to prevent duplicate executions
+  //     urlParams.delete("email");
+  //     window.history.replaceState(
+  //       {},
+  //       "",
+  //       window.location.pathname + "?" + urlParams.toString()
+  //     );
+
+  //     // Update the email in the context
+  //     setEmail(newEmail);
+  //   }
+
+  //   // Show the chat when the component is mounted
+  //   if (typeof document !== "undefined") {
+  //     setShowChat(true);
+  //   }
+  // }, [setEmail]);
   useEffect(() => {
-    // Check if the "email" exists in the URL
-    if (email) {
+    // Check if the "email" exists in the local storage
+    const storedEmail = localStorage.getItem("email");
+
+    if (storedEmail) {
       // Execute your callback here
-      console.log("Email query parameter exists!");
+      console.log("Email found in local storage!");
 
-      // Remove the query parameter to prevent duplicate executions
-      urlParams.delete("email");
-      window.history.replaceState(
-        {},
-        "",
-        window.location.pathname + "?" + urlParams.toString()
-      );
+      // Show the chat when the component is mounted
+      if (typeof document !== "undefined") {
+        setShowChat(true);
+      }
     }
-
-    // Show the chat when the component is mounted
-    if (typeof document !== "undefined") {
-      setShowChat(true);
-    }
-  }, [email]);
+  }, []);
 
   // Dynamically import ChatEngine and MessageFormSocial components
   let ChatEngine;
@@ -49,6 +92,8 @@ const Chat = () => {
     return null; // Return null or an error message component
   }
 
+  // Get the email from the local storage
+  const email = localStorage.getItem("email");
   // ChatEngine setup
   const username = email;
   const secret = "secret";
@@ -78,5 +123,11 @@ const Chat = () => {
   );
 };
 
-// Export the Chat component
-export default Chat;
+// Export the Chat component wrapped with the EmailProvider
+export default function WrappedChat() {
+  return (
+    <EmailProvider>
+      <Chat />
+    </EmailProvider>
+  );
+}
