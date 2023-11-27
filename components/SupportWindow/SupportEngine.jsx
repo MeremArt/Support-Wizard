@@ -1,12 +1,62 @@
 import dynamic from "next/dynamic";
 import React, { useMemo, useState, useEffect } from "react";
-
+import axios from "axios";
 const SupportEngine = (props) => {
   const [showChat, setShowChat] = useState(false);
+  const [email, setEmail] = useState("");
+  const [chatId, setChatId] = useState(null);
   const username = "Emotional-damage";
   const secret = "Secret";
   const chatID = "209340";
+  // getting chatid
 
+  useEffect(() => {
+    const createOrUpdateUser = async () => {
+      const requestData = {
+        usernames: [{ email }],
+        title: "chuksaginamada1@gmail.com",
+        is_direct_chat: false,
+      };
+
+      const headers = {
+        "Content-Type": "application/json",
+        "Private-Key": "8b8c5f42-a1e4-41f7-800b-a1ecd79e4924",
+        "User-Name": "chuksaginamada@gmail.com",
+        "User-Secret": "secret",
+      };
+
+      try {
+        const response = await axios.put(
+          "https://api.chatengine.io/users/",
+          requestData,
+          { headers }
+        );
+
+        // Log the entire response for both success and failure
+        console.log("API Response:", response);
+
+        // Extract chatId from the response
+        const chatId = response?.data?.data?.id || null;
+        setChatId(chatId);
+        console.log("Chat ID:", chatId);
+      } catch (error) {
+        // Log the entire error object for failure
+        console.error("Error creating or updating user:", error);
+
+        // Check if the error has a response and log its status, data, and headers
+        if (error.response) {
+          console.error(
+            "Error Response:",
+            error.response.status,
+            error.response.data,
+            error.response.headers
+          );
+        }
+      }
+    };
+
+    createOrUpdateUser();
+  }, [email]);
   // Use a single useEffect for handling both cases
   useEffect(() => {
     if (props.visible) {
@@ -43,12 +93,12 @@ const SupportEngine = (props) => {
       {showChat && (
         <ChatEngineWrapper>
           <ChatSocket
-            projectID="6f18118b-9e6a-4c2b-a46e-596cad716793"
-            senderUsername={username}
-            chatID="210851"
-            chatAccessKey="ca-57c22045-d8ac-4496-ab70-d850ddfbdb70"
+            projectID="9fc5ff33-97af-4fac-ae05-264e99afb765"
+            senderUsername={email}
+            chatID={chatId}
+            chatAccessKey="8b8c5f42-a1e4-41f7-800b-a1ecd79e4924"
           />
-          <ChatFeed activeChat="210851" />
+          <ChatFeed activeChat={chatId} />
         </ChatEngineWrapper>
       )}
     </div>

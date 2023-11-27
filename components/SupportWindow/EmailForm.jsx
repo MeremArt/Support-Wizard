@@ -12,51 +12,46 @@ const EmailForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log("Sending email", email);
+    console.log("Email submitted:", email);
+    setLoading(false);
 
-    // Create or retrieve the user
-    getOrCreateUser(email, (user) => {
-      props.setUser && props.setUser(user);
-      // Create or retrieve the chat
-      getOrCreateChat((chat) => {
-        setLoading(false);
-        props.setChat && props.setChat(chat);
-      });
-    });
+    // Pass the email to the parent component
+    props.setEmail && props.setEmail(email);
+    console.log("Email submitted in SupportWindow:", email);
   };
 
-  const getOrCreateUser = (email, callback) => {
-    axios
-      .put(
-        `https://api.chatengine.io/users/`,
-        {
-          username: email,
-          secret: email,
-          email: email,
-        },
-        {
-          headers: { "Private-Key": process.env.PRIVATE_KEY },
-        }
-      )
-      .then((response) => callback(response.data))
-      .catch((error) => console.error("Error creating user", error));
-  };
+  // const getOrCreateUser = (email, callback) => {
+  //   axios
+  //     .put(
+  //       `https://api.chatengine.io/users/`,
+  //       {
+  //         username: email,
+  //         secret: email,
+  //         email: email,
+  //       },
+  //       {
+  //         headers: { "Private-Key": process.env.PRIVATE_KEY },
+  //       }
+  //     )
+  //     .then((response) => callback(response.data))
+  //     .catch((error) => console.error("Error creating user", error));
+  // };
 
-  const getOrCreateChat = (user, callback) => {
-    axios
-      .put(
-        `https://api.chatengine.io/chats/`,
-        {
-          usernames: [userName, email],
-          is_direct_chat: true,
-        },
-        {
-          headers: { "Private-Key": process.env.CE_PROJECT_ID },
-        }
-      )
-      .then((response) => callback(response.data))
-      .catch((error) => console.error("Error creating chat", error));
-  };
+  // const getOrCreateChat = (user, callback) => {
+  //   axios
+  //     .put(
+  //       `https://api.chatengine.io/chats/`,
+  //       {
+  //         usernames: [userName, email],
+  //         is_direct_chat: true,
+  //       },
+  //       {
+  //         headers: { "Private-Key": process.env.CE_PROJECT_ID },
+  //       }
+  //     )
+  //     .then((response) => callback(response.data))
+  //     .catch((error) => console.error("Error creating chat", error));
+  // };
 
   return (
     <div
@@ -114,7 +109,7 @@ const EmailForm = (props) => {
         </div>
 
         <form
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit}
           style={{ position: "relative", width: "100%", top: "-22.75%" }}
         >
           <input
