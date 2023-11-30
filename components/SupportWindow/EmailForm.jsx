@@ -8,7 +8,6 @@ const EmailForm = (props) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState(``);
   const projectID = "f3e7ff82-0dee-4799-ab2b-44c43fd6f232";
-  const userName = "Support Wizard";
 
   const getOrCreateUser = async (callback) => {
     try {
@@ -48,30 +47,31 @@ const EmailForm = (props) => {
       )
       .then((response) => callback(response.data))
       .catch((error) =>
-        console.error("Error creating chat", error.response.data)
+        console.error("Error creating chat", error.response?.data)
       );
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log("Email submitted:", email);
-    setLoading(false);
 
-    getOrCreateUser();
-    getOrCreateChat((chat) => console.log("success", chat));
-    getOrCreateUser((user) => {
-      props.setUser && props.setUser(user);
-      getOrCreateChat((chat) => {
-        setLoading(false);
-        props.setChat && props.setChat(chat);
-      });
-    });
+    try {
+      const user = await getOrCreateUser();
+      props.setUser?.(user);
+
+      const chat = await getOrCreateChat();
+      props.setChat?.(chat);
+    } catch (error) {
+      console.error("Error during form submission:", error);
+    } finally {
+      setLoading(false);
+    }
 
     // Pass the email to the parent component
-    props.setEmail && props.setEmail(email);
+    props.setEmail?.(email);
     console.log("Email submitted in SupportWindow:", email);
   };
+
   return (
     <div
       style={{

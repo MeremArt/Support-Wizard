@@ -45,7 +45,7 @@ const SupportEngine =
             <Socket
               projectID="9fc5ff33-97af-4fac-ae05-264e99afb765"
               userName={props.user.email}
-              chatID={chatID}
+              chatID={props.chat.id}
             />
             <ChatFeed activeChat={props.chat.id} />
           </ChatEngineWrapper>
