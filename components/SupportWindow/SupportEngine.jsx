@@ -42,13 +42,16 @@ const SupportEngine = ({ user, chat, visible }) => {
     []
   );
 
+  // Check if user is available before accessing its properties
+  const userEmail = user ? user.email : "";
+
   return (
     <div className="transition-3" style={chatWindowStyles(visible)}>
       {showChat && (
         <ChatEngineWrapper>
           <Socket
             projectID="9fc5ff33-97af-4fac-ae05-264e99afb765"
-            userName={user.email}
+            userName={userEmail}
             chatID={chat.id}
           />
           <ChatFeed activeChat={chat.id} />
