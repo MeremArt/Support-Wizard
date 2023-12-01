@@ -44,7 +44,7 @@ const SupportEngine = ({ user, chat, visible }) => {
 
   // Check if user is available before accessing its properties
   const userIT = user ? user.email : "";
-  const userID = showChat ? chat.id : "";
+  const userID = user ? user.id : null;
 
   return (
     <div className="transition-3" style={chatWindowStyles(visible)}>
