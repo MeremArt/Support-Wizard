@@ -13,16 +13,19 @@ const EmailForm = (props) => {
     event.preventDefault();
     setLoading(true);
 
-    localStorage.setItem("userEmail", email);
-    const storedEmail = localStorage.getItem("userEmail");
-    if (storedEmail) {
-      console.log("Email successfully stored in localStorage:", storedEmail);
-    } else {
-      console.error("Failed to store email in localStorage");
+    // Check if window is defined to ensure it's running in the browser
+    if (typeof window !== "undefined") {
+      localStorage.setItem("userEmail", email);
+      const storedEmail = localStorage.getItem("userEmail");
+      if (storedEmail) {
+        console.log("Email successfully stored in localStorage:", storedEmail);
+      } else {
+        console.error("Failed to store email in localStorage");
+      }
     }
+
     props.handleEmailSubmit?.(email);
   };
-
   return (
     <div
       style={{
