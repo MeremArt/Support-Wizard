@@ -5,9 +5,14 @@ import Avatar from "../Avatar/page";
 
 const SupportEngine = ({ user, chat, visible }) => {
   const [showChat, setShowChat] = useState(false);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    if (visible) {
+    // Retrieve the email from local storage
+    const storedEmail = localStorage.getItem("userEmail");
+    setEmail(storedEmail || "");
+
+    if (visible && storedEmail) {
       setTimeout(() => {
         setShowChat(true);
       }, 500);
@@ -42,9 +47,12 @@ const SupportEngine = ({ user, chat, visible }) => {
     []
   );
 
-  // Check if user is available before accessing its properties
-  const userIT = user ? user.email : "";
-  const userID = user ? user.id : null;
+  // Log the email when it is passed successfully
+  useEffect(() => {
+    if (email && showChat) {
+      console.log("Email passed to SupportEngine:", email);
+    }
+  }, [email, showChat]);
 
   return (
     <div className="transition-3" style={chatWindowStyles(visible)}>
@@ -52,10 +60,10 @@ const SupportEngine = ({ user, chat, visible }) => {
         <ChatEngineWrapper>
           <Socket
             projectID="9fc5ff33-97af-4fac-ae05-264e99afb765"
-            userName={userIT}
-            userSecret={userIT}
+            userName={email} // Pass the email as the username
+            userSecret="secret"
           />
-          <ChatFeed activeChat={userID} />
+          <ChatFeed activeChat="215972" />
         </ChatEngineWrapper>
       )}
     </div>

@@ -9,67 +9,18 @@ const EmailForm = (props) => {
   const [email, setEmail] = useState(``);
   const projectID = "f3e7ff82-0dee-4799-ab2b-44c43fd6f232";
 
-  const getOrCreateUser = async (callback) => {
-    try {
-      const response = await axios.put(
-        "https://api.chatengine.io/users/",
-        {
-          username: email,
-          secret: email,
-          email: email,
-        },
-        {
-          headers: { "Private-Key": process.env.PRIVATE_KEY },
-        }
-      );
-
-      if (response.data?.username) {
-        callback(response.data);
-      } else {
-        console.error("Error creating/getting user:", response.data);
-      }
-    } catch (error) {
-      console.error("Error creating/getting user:", error);
-    }
-  };
-
-  const getOrCreateChat = (callback) => {
-    axios
-      .put(
-        `https://api.chatengine.io/chats/`,
-        {
-          usernames: ["Marschalice@gmail.com", email],
-          is_direct_chat: true,
-        },
-        {
-          headers: { "Private-Key": process.env.PRIVATE_KEY },
-        }
-      )
-      .then((response) => callback(response.data))
-      .catch((error) =>
-        console.error("Error creating chat", error.response?.data)
-      );
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
 
-    try {
-      const user = await getOrCreateUser();
-      props.setUser?.(user);
-
-      const chat = await getOrCreateChat();
-      props.setChat?.(chat);
-    } catch (error) {
-      console.error("Error during form submission:", error);
-    } finally {
-      setLoading(false);
+    localStorage.setItem("userEmail", email);
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+      console.log("Email successfully stored in localStorage:", storedEmail);
+    } else {
+      console.error("Failed to store email in localStorage");
     }
-
-    // Pass the email to the parent component
-    props.setEmail?.(email);
-    console.log("Email submitted in SupportWindow:", email);
+    props.handleEmailSubmit?.(email);
   };
 
   return (
