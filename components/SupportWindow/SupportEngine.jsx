@@ -1,81 +1,70 @@
-import dynamic from "next/dynamic";
-import React, { useMemo, useState, useEffect } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import Avatar from "../Avatar/page";
+import React, { useState, useEffect } from "react";
+import EmailForm from "./EmailForm";
+import SupportEngine from "./SupportEngine";
 
-const SupportEngine = ({ user, chat, visible }) => {
-  const [showChat, setShowChat] = useState(false);
-  const [email, setEmail] = useState("");
+const SupportWindow = (props) => {
+  // Use a function to retrieve the email so it's only called on the client side
+  const getStoredEmail = () => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("userEmail") || "";
+    }
+    return "";
+  };
+
+  const [email, setEmail] = useState(getStoredEmail);
+  const [user, setUser] = useState(null);
+  const [chat, setChat] = useState(null);
+  const [emailFormVisible, setEmailFormVisible] = useState(true);
+
+  const handleEmailSubmit = (email, user, chat) => {
+    setEmail(email);
+    setUser(user);
+    setChat(chat);
+
+    // Log the email to the console
+    console.log("Email passed through SupportWindow:", email);
+    localStorage.setItem("userEmail", email);
+
+    // Hide the EmailForm only after the email is successfully passed
+    setEmailFormVisible(false);
+  };
 
   useEffect(() => {
-    // Retrieve the email from local storage
-    const storedEmail = localStorage.getItem("userEmail");
-    setEmail(storedEmail || "");
-
-    if (visible && storedEmail) {
-      setTimeout(() => {
-        setShowChat(true);
-      }, 500);
-    } else if (typeof document !== "undefined") {
-      setShowChat(true);
+    // Clear the email from local storage on component mount
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("userEmail");
     }
-  }, [visible]);
+  }, []);
 
-  const ChatEngineWrapper = useMemo(
-    () =>
-      dynamic(() =>
-        import("react-chat-engine").then(
-          (module) => module["ChatEngineWrapper"]
-        )
-      ),
-    []
-  );
-
-  const Socket = useMemo(
-    () =>
-      dynamic(() =>
-        import("react-chat-engine").then((module) => module["Socket"])
-      ),
-    []
-  );
-
-  const ChatFeed = useMemo(
-    () =>
-      dynamic(() =>
-        import("react-chat-engine").then((module) => module["ChatFeed"])
-      ),
-    []
-  );
-
-  // Log the email when it is passed successfully
   useEffect(() => {
-    if (email && showChat) {
-      console.log("Email passed to SupportEngine:", email);
+    // Show the EmailForm only if the email is not available
+    if (!email && !emailFormVisible) {
+      setEmailFormVisible(true);
     }
-  }, [email, showChat]);
+  }, [email, emailFormVisible]);
 
   return (
-    <div className="transition-3" style={chatWindowStyles(visible)}>
-      {showChat && (
-        <ChatEngineWrapper>
-          <Socket
-            projectID="9fc5ff33-97af-4fac-ae05-264e99afb765"
-            userName={email} // Pass the email as the username
-            userSecret="secret"
-          />
-          <ChatFeed activeChat="215972" />
-        </ChatEngineWrapper>
+    <div className="transition-3" style={{ opacity: props.visible ? 1 : 0 }}>
+      {emailFormVisible && (
+        <EmailForm
+          visible={user === null || chat === null}
+          setUser={(user) => setUser(user)}
+          setChat={(chat) => setChat(chat)}
+          setEmail={(email) => setEmail(email)}
+          handleEmailSubmit={handleEmailSubmit}
+        />
+      )}
+
+      {email !== "" ? (
+        <SupportEngine visible={user !== null && chat !== null} />
+      ) : (
+        <div>
+          {/* Optional: Display a message or component when email is not passed */}
+          Email not yet provided
+        </div>
       )}
     </div>
   );
 };
 
-const chatWindowStyles = (isVisible) => ({
-  width: "100%",
-  backgroundColor: "#fff",
-  height: isVisible ? "100%" : "0px",
-  zIndex: isVisible ? "100" : "0",
-});
-
-SupportEngine.displayName = "SupportEngine";
-export default SupportEngine;
+export default SupportWindow;
