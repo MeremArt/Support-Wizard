@@ -1,70 +1,77 @@
-import React, { useState, useEffect } from "react";
-import EmailForm from "./EmailForm";
-import SupportEngine from "./SupportEngine";
+import dynamic from "next/dynamic";
+import React, { useMemo, useState, useEffect } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Avatar from "../Avatar/page";
 
-const SupportWindow = (props) => {
-  // Use a function to retrieve the email so it's only called on the client side
-  const getStoredEmail = () => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("userEmail") || "";
-    }
-    return "";
-  };
-
-  const [email, setEmail] = useState(getStoredEmail);
-  const [user, setUser] = useState(null);
-  const [chat, setChat] = useState(null);
-  const [emailFormVisible, setEmailFormVisible] = useState(true);
-
-  const handleEmailSubmit = (email, user, chat) => {
-    setEmail(email);
-    setUser(user);
-    setChat(chat);
-
-    // Log the email to the console
-    console.log("Email passed through SupportWindow:", email);
-    localStorage.setItem("userEmail", email);
-
-    // Hide the EmailForm only after the email is successfully passed
-    setEmailFormVisible(false);
-  };
+const SupportEngine = ({ user, chat, visible }) => {
+  const [showChat, setShowChat] = useState(false);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    // Clear the email from local storage on component mount
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("userEmail");
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+      setEmail(storedEmail);
     }
-  }, []);
 
-  useEffect(() => {
-    // Show the EmailForm only if the email is not available
-    if (!email && !emailFormVisible) {
-      setEmailFormVisible(true);
+    if (visible) {
+      setTimeout(() => {
+        setShowChat(true);
+      }, 500);
+    } else if (typeof document !== "undefined") {
+      setShowChat(true);
     }
-  }, [email, emailFormVisible]);
+
+    // Clear the email from local storage once retrieved
+    localStorage.removeItem("userEmail");
+  }, [visible]);
+
+  const ChatEngineWrapper = useMemo(
+    () =>
+      dynamic(() =>
+        import("react-chat-engine").then(
+          (module) => module["ChatEngineWrapper"]
+        )
+      ),
+    []
+  );
+
+  const Socket = useMemo(
+    () =>
+      dynamic(() =>
+        import("react-chat-engine").then((module) => module["Socket"])
+      ),
+    []
+  );
+
+  const ChatFeed = useMemo(
+    () =>
+      dynamic(() =>
+        import("react-chat-engine").then((module) => module["ChatFeed"])
+      ),
+    []
+  );
 
   return (
-    <div className="transition-3" style={{ opacity: props.visible ? 1 : 0 }}>
-      {emailFormVisible && (
-        <EmailForm
-          visible={user === null || chat === null}
-          setUser={(user) => setUser(user)}
-          setChat={(chat) => setChat(chat)}
-          setEmail={(email) => setEmail(email)}
-          handleEmailSubmit={handleEmailSubmit}
-        />
-      )}
-
-      {email !== "" ? (
-        <SupportEngine visible={user !== null && chat !== null} />
-      ) : (
-        <div>
-          {/* Optional: Display a message or component when email is not passed */}
-          Email not yet provided
-        </div>
+    <div className="transition-3" style={chatWindowStyles(visible)}>
+      {showChat && (
+        <ChatEngineWrapper>
+          <Socket
+            projectID="9fc5ff33-97af-4fac-ae05-264e99afb765"
+            userName={email} // Pass the email as the username
+            userSecret="secret"
+          />
+          <ChatFeed activeChat="215972" />
+        </ChatEngineWrapper>
       )}
     </div>
   );
 };
 
-export default SupportWindow;
+const chatWindowStyles = (isVisible) => ({
+  width: "100%",
+  backgroundColor: "#fff",
+  height: isVisible ? "100%" : "0px",
+  zIndex: isVisible ? "100" : "0",
+});
+
+export default SupportEngine;

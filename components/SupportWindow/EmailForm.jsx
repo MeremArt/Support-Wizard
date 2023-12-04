@@ -7,7 +7,6 @@ import axios from "axios";
 const EmailForm = (props) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState(``);
-  const projectID = "f3e7ff82-0dee-4799-ab2b-44c43fd6f232";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
