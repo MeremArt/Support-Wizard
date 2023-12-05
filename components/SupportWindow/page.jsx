@@ -5,7 +5,8 @@ import SupportEngine from "./SupportEngine";
 
 const SupportWindow = (props) => {
   // const storedEmail = localStorage.getItem("userEmail");
-  const [email, setEmail] = useState(storedEmail || "");
+  // const [email, setEmail] = useState(storedEmail || "");
+  const [email, setEmail] = useState("");
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState(null);
   const [emailFormVisible, setEmailFormVisible] = useState(true);
