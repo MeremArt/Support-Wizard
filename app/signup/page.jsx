@@ -6,6 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import { toast, ToastContainer } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -84,11 +85,12 @@ const Signup = () => {
           />
           <div className="p-6 md:p-12 bg-wizard rounded-r-2xl">
             <h2 className="mb-4 py-2 text-xl text-white font-bold">
-              Welcome to SupportWizard
+              Welcome to SupportWizard{/*  */} 🧙‍♂️
             </h2>
             <p className="max-w-sm text-sm mb-12 font-light text-gray-600">
               We're thrilled to have you join our Support Wizard community!
             </p>
+
             <form onSubmit={handleSignUp}>
               <div className="mb-4">
                 <label htmlFor="email" className="flex text-white py-3">
@@ -138,7 +140,11 @@ const Signup = () => {
                 type="submit"
                 className="w-full p-3 text-white bg-horror rounded-full text-transform: capitalize hover:opacity-70 duration-200"
               >
-                {isLoading ? "Creating account..." : "Create account"}
+                {isLoading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : (
+                  "Create account"
+                )}
               </button>
             </form>
           </div>

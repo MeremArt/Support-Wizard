@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import Image from "next/image";
+import CircularProgress from "@mui/material/CircularProgress";
 import dashboard from "../dashboard/page";
 
 const url = "https://chat-wizard.vercel.app/api/v1/users/login/";
@@ -71,7 +72,6 @@ const Signin = () => {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
       <main className="flex items-center justify-center bg-horror min-h-screen">
         {/* card container */}
         <div className="flex flex-col m-6 space-y-10 bg-wizard md:bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 md:m-0">
@@ -87,7 +87,7 @@ const Signin = () => {
           <div className="p-6 md:p-12 bg-wizard rounded-r-2xl">
             {/* Top content */}
             <h2 className="mb-4 py-2 text-xl text-white font-bold">
-              Welcome back
+              Welcome back 🧙‍♂️
             </h2>
             <form onSubmit={handleLogin}>
               <label className="flex text-white py-3">Business email</label>
@@ -116,7 +116,11 @@ const Signin = () => {
                 className="w-full p-3 text-white bg-horror rounded-full text-transform: capitalize hover:opacity-70 duration-200"
                 disabled={isLoading}
               >
-                {isLoading ? "Logging..." : " Login"}
+                {isLoading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : (
+                  " Login"
+                )}
               </button>
             </form>
           </div>
