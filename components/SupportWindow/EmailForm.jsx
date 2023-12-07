@@ -1,69 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "../Avatar/page";
 import { styles } from "../Avatar/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
+
+const API_URLS = {
+  otherApi: "https://chat-wizard.vercel.app/api/v1/chats/",
+};
+
 const EmailForm = (props) => {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState(``);
-  function getOrCreateUser(callback) {
-    axios
-      .put(
-        "https://api.chatengine.io/users/",
-        { username: email, secret: email },
-        {
-          headers: {
-            "Private-Key": "4321c0af-9ff1-4316-9048-bcadac3bd9c8",
-            "Content-Type": "application/json",
-            Vary: "Accept, Origin",
-            Allow: "GET, POST, PUT, HEAD, OPTIONS",
-            "X-Frame-Options": "DENY",
-            // "Content-Length": "279",
-            // "X-Content-Type-Options": "nosniff",
-            "Referrer-Policy": "same-origin",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          },
-          mode: "cors", // Added CORS mode
-          credentials: true, // Do not include credentials
-        }
-      )
-      .then((response) => callback(response.data))
-      .catch((error) => console.log("Get or create user error", error));
-  }
+  const [email, setEmail] = useState("");
 
-  const getCreateChat = () => {
-    const url = "https://api.chatengine.io/chats/";
-    const headers = {
-      "Project-ID": "0771af89-3ef1-486c-bc2d-8fc17abb0d33",
-      "User-Name": email,
-      "User-Secret": "{{user_secret}}",
-      "Content-Type": "application/json",
-      Vary: "Accept, Origin",
-      Allow: "GET, POST, PUT, HEAD, OPTIONS",
-
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      "X-Cloud-Trace-Context": "356f99312aac3a16d462aed40bced7fa",
-    };
-    const data = {
-      usernames: ["Ugofranklin22@gmail.com", email],
-      title: "Support",
-      is_direct_chat: false,
+  const otherApi = () => {
+    const requestBody = {
+      adminEmail: email,
+      userEmail: email,
     };
 
     axios
-      .put(url, data, {
-        headers,
-        mode: "cors", // Added CORS mode
-        credentials: true, // Do not include credentials
-      })
+      .put(API_URLS.otherApi, requestBody)
       .then((response) => {
-        console.log("Response data:", response.data);
+        console.log("PUT request successful:", response.data);
+        console.log(email);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("Error making PUT request:", error);
       });
   };
 
@@ -71,29 +34,20 @@ const EmailForm = (props) => {
     event.preventDefault();
     setLoading(true);
 
-    // Check if window is defined to ensure it's running in the browser
     if (typeof window !== "undefined") {
       localStorage.setItem("userEmail", email);
       const storedEmail = localStorage.getItem("userEmail");
       if (storedEmail) {
         console.log("Email successfully stored in localStorage:", storedEmail);
-
-        // Call getOrCreateUser function
-        getOrCreateUser((userData) => {
-          console.log("Response from getOrCreateUser:", userData);
-          // Further processing or state updates based on the response can be done here
-        });
       } else {
         console.error("Failed to store email in localStorage");
       }
     }
 
-    // Call getCreateChat function
-    getCreateChat();
-
+    // getCreateChat();
+    otherApi();
     props.handleEmailSubmit?.(email);
   };
-
   return (
     <div
       style={{
