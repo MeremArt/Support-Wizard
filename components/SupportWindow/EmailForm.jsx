@@ -13,6 +13,23 @@ const EmailForm = (props) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
+  // const otherApi = () => {
+  //   const requestBody = {
+  //     adminEmail: email,
+  //     userEmail: email,
+  //   };
+
+  //   axios
+  //     .put(API_URLS.otherApi, requestBody)
+  //     .then((response) => {
+  //       console.log("PUT request successful:", response.data);
+  //       console.log(email);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error making PUT request:", error);
+  //     });
+  // };
+
   const otherApi = () => {
     const requestBody = {
       adminEmail: email,
@@ -23,6 +40,24 @@ const EmailForm = (props) => {
       .put(API_URLS.otherApi, requestBody)
       .then((response) => {
         console.log("PUT request successful:", response.data);
+
+        // Assuming response.data contains the chatId
+        const chatId = response.data.chatId;
+
+        // Save chatId to localStorage
+        if (typeof window !== "undefined") {
+          localStorage.setItem("chatId", chatId);
+          const storedChatId = localStorage.getItem("chatId");
+          if (storedChatId) {
+            console.log(
+              "ChatId successfully stored in localStorage:",
+              storedChatId
+            );
+          } else {
+            console.error("Failed to store chatId in localStorage");
+          }
+        }
+
         console.log(email);
       })
       .catch((error) => {

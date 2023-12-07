@@ -6,11 +6,13 @@ import Avatar from "../Avatar/page";
 const SupportEngine = ({ user, chat, visible }) => {
   const [showChat, setShowChat] = useState(false);
   const [email, setEmail] = useState("");
-
+  const [chatId, setChatId] = useState("");
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
-    if (storedEmail) {
+    const storedChatId = localStorage.getItem("chatId");
+    if (storedEmail && storedChatId) {
       setEmail(storedEmail);
+      setChatId(storedChatId);
     }
 
     if (visible) {
@@ -22,7 +24,9 @@ const SupportEngine = ({ user, chat, visible }) => {
     }
 
     // Clear the email from local storage once retrieved
+    console.log(storedChatId);
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("chatId");
   }, [visible]);
 
   const ChatEngineWrapper = useMemo(
@@ -56,11 +60,11 @@ const SupportEngine = ({ user, chat, visible }) => {
       {showChat && (
         <ChatEngineWrapper>
           <Socket
-            projectID="0771af89-3ef1-486c-bc2d-8fc17abb0d33"
+            projectID="30a0ab26-3bce-4bce-a5f6-523ba1ba2256"
             userName={email} // Pass the email as the username
             userSecret="secret"
           />
-          <ChatFeed activeChat="215972" />
+          <ChatFeed activeChat={chatId} />
         </ChatEngineWrapper>
       )}
     </div>
