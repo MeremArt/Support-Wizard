@@ -130,7 +130,7 @@ const EmailForm = (props) => {
           style={{ position: "relative", width: "100%", top: "-22.75%" }}
         >
           <input
-            placeholder="Your Email"
+            placeholder="Enter your email..."
             onChange={(e) => setEmail(e.target.value)}
             style={styles.emailInput}
           />
