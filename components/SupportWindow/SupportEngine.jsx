@@ -7,12 +7,15 @@ const SupportEngine = ({ user, chat, visible }) => {
   const [showChat, setShowChat] = useState(false);
   const [email, setEmail] = useState("");
   const [chatId, setChatId] = useState("");
+  const [accessKey, setAccessKey] = useState("");
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
     const storedChatId = localStorage.getItem("chatId");
-    if (storedEmail && storedChatId) {
+    const storeAccessKey = localStorage.getItem("accessKey");
+    if (storedEmail && storedChatId && storeAccessKey) {
       setEmail(storedEmail);
       setChatId(storedChatId);
+      setAccessKey(storeAccessKey);
     }
 
     if (visible) {
@@ -25,6 +28,7 @@ const SupportEngine = ({ user, chat, visible }) => {
 
     // Clear the email from local storage once retrieved
     console.log(storedChatId);
+    console.log(storeAccessKey);
     localStorage.removeItem("userEmail");
     localStorage.removeItem("chatId");
   }, [visible]);
@@ -39,10 +43,10 @@ const SupportEngine = ({ user, chat, visible }) => {
     []
   );
 
-  const Socket = useMemo(
+  const ChatSocket = useMemo(
     () =>
       dynamic(() =>
-        import("react-chat-engine").then((module) => module["Socket"])
+        import("react-chat-engine").then((module) => module["ChatSocket"])
       ),
     []
   );
@@ -59,10 +63,11 @@ const SupportEngine = ({ user, chat, visible }) => {
     <div className="transition-3" style={chatWindowStyles(visible)}>
       {showChat && (
         <ChatEngineWrapper>
-          <Socket
+          <ChatSocket
             projectID="30a0ab26-3bce-4bce-a5f6-523ba1ba2256"
-            userName={email} // Pass the email as the username
-            userSecret="secret"
+            senderUsername={email} // Pass the email as the username
+            chatID={chatId}
+            chatAccessKey={accessKey}
           />
           <ChatFeed activeChat={chatId} />
         </ChatEngineWrapper>
