@@ -27,7 +27,7 @@ const Page = () => {
         "https://chat-wizard.vercel.app/api/v1/chats/script-tag",
         {
           params: {
-            adminEmail: { email },
+            adminEmail: email,
           },
         }
       );
