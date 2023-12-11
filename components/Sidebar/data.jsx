@@ -100,7 +100,7 @@ export const data = [
     content: [
       {
         title: "Documentation",
-        link: "/guides/documentation",
+        link: "/dashboard/Documentation",
       },
     ],
   },
