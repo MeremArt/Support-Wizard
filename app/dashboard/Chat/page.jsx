@@ -99,7 +99,7 @@ const Chat = () => {
   // ChatEngine setup
   const username = email || ""; // Ensure username is not undefined
   const secret = "secret";
-  const projectID = "30a0ab26-3bce-4bce-a5f6-523ba1ba2256";
+  const projectID = "f65d0d7e-3dbd-4fb4-bb60-b26596613991";
 
   // Render the component
   return (

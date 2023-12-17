@@ -64,7 +64,7 @@ const SupportEngine = ({ user, chat, visible }) => {
       {showChat && (
         <ChatEngineWrapper>
           <ChatSocket
-            projectID="30a0ab26-3bce-4bce-a5f6-523ba1ba2256"
+            projectID="f65d0d7e-3dbd-4fb4-bb60-b26596613991"
             senderUsername={email} // Pass the email as the username
             chatID={chatId}
             chatAccessKey={accessKey}
